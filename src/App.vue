@@ -27,6 +27,11 @@
     <!-- banner -->
     <div class="banner" :style="backgroundDiv">
       <h1>寻找并预定覆盖全港的找换店</h1>
+      <div class="box-card">
+        <div v-for="o in 4" :key="o" class="text item">
+          {{ "列表内容 " + o }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -38,11 +43,11 @@ export default {
     return {
       language: "中文",
       backgroundDiv: {
-         backgroundImage: 'url(' + require('./assets/BG.png') + ')'
-      }
+        backgroundImage: "url(" + require("./assets/BG.png") + ")",
+      },
     };
   },
-  
+
   methods: {
     handleLanguageCommand(value) {
       console.log(value);
@@ -92,8 +97,17 @@ div .banner {
   display: block;
   flex-direction: column;
   position: absolute;
+  justify-content:center
 }
 .banner h1 {
-  margin-top: 100px;
+  margin-top: 190px;
+  font-size: 70px;
+}
+.banner .box-card {
+  width: 560px;
+  height: 585px;
+  background: #ffffff;
+  box-shadow: 16px 8px 79px 0px rgba(84, 94, 119, 0.2);
+  border-radius: 12px;
 }
 </style>
