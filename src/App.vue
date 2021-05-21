@@ -27,17 +27,18 @@
     <!-- banner -->
     <div class="banner" :style="backgroundDiv">
       <h1>寻找并预定覆盖全港的找换店</h1>
-      <div class="box-card">
-        <div v-for="o in 4" :key="o" class="text item">
-          {{ "列表内容 " + o }}
-        </div>
+      <div class="money-change">
+        <calculator-box class="box-card"> </calculator-box>
+        <div class="money-list">123</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import CalculatorBox from "./components/CalculatorBox.vue";
 export default {
+  components: { CalculatorBox },
   name: "App",
   data() {
     return {
@@ -61,7 +62,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #333;
 }
 div .header {
@@ -87,21 +87,26 @@ div .header {
 
 .header .language {
   flex: auto;
-  float: right;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-right: 280px;
 }
 div .banner {
   background: no-repeat center top;
-  /* background-color: red; */
   height: 1080px;
   width: 100%;
-  display: block;
+  display: flex;
   flex-direction: column;
   position: absolute;
-  justify-content:center
 }
 .banner h1 {
   margin-top: 190px;
   font-size: 70px;
+  text-align: center;
+}
+.banner .money-change {
+  display: flex;
+  flex-direction: row;
 }
 .banner .box-card {
   width: 560px;
@@ -109,5 +114,16 @@ div .banner {
   background: #ffffff;
   box-shadow: 16px 8px 79px 0px rgba(84, 94, 119, 0.2);
   border-radius: 12px;
+  align-self: center;
+  margin: 0 auto;
+  position: relative;
+}
+.banner .money-list {
+  width: 220px;
+  height: 412px;
+  background: red;
+  box-shadow: 8px 9px 24px 0px rgba(165, 148, 191, 0.25);
+  border-radius: 6px;
+  position: absolute;
 }
 </style>
