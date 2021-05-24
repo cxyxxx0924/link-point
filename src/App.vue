@@ -4,7 +4,7 @@
     <div class="header">
       <span class="xchange">Xchange</span>
       <el-menu
-        default-active="1"
+        :default-active="selected"
         mode="horizontal"
         @select="handleSelect"
         active-text-color="#3068F4"
@@ -35,6 +35,12 @@
     <div v-else-if="selected === '2'">
       <exchange-money style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px;" />
     </div>
+    <div v-else-if="selected === '3'">
+      <faq style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px;" />
+    </div>
+    <div v-else-if="selected === '4'">
+      <about-us></about-us>
+    </div>
     <!-- banner -->
 
     <div class="footer1">
@@ -63,16 +69,20 @@
 
 <script>
 import MainIndex from "./components/MainIndex.vue";
-import ExchangeMoney from "./components/ExchangeMoney.vue"
+import ExchangeMoney from "./components/ExchangeMoney.vue";
+import AboutUs from "./components/AboutUs.vue"
+import Faq from './components/Faq.vue';
 export default {
   components: {
     MainIndex,
-    ExchangeMoney
+    ExchangeMoney,
+    AboutUs,
+    Faq
   },
   name: "App",
   data() {
     return {
-      selected: "1",
+      selected: "3",
       language: "中文",
     };
   },
@@ -100,6 +110,7 @@ div .header {
   flex-direction: row;
   align-items: center;
   position: relative;
+  padding: 0 260px;
   /* border-bottom: #3356A5 solid 14px;  */
   box-shadow: 9px 11px 46px 0px rgba(51, 86, 165, 0.05);
 }
@@ -107,7 +118,6 @@ div .header {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 36px;
   color: #3048f4;
-  margin-left: 277px;
   margin-right: 102px;
 }
 .header .el-menu {
@@ -121,16 +131,14 @@ div .header {
   flex: auto;
   display: flex;
   flex-direction: row-reverse;
-  margin-right: 280px;
 }
 
 .footer1 {
-  height: 360px;
   background: #fff;
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 0px 280px;
+  padding: 80px 130px;
   border-top: solid 1px #EEEEEE;
   h3 {
     font-size: 46px;
@@ -166,7 +174,7 @@ div .header {
     display: flex;
     flex-direction: row-reverse;
     a {
-      margin-right: 45px;
+      margin-left: 45px;
       color: #333;
       font-size: 20px;
       font-weight: 500;
