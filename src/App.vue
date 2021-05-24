@@ -3,7 +3,12 @@
     <!-- header -->
     <div class="header">
       <span class="xchange">Xchange</span>
-      <el-menu default-active="1" mode="horizontal" active-text-color="#3068F4">
+      <el-menu
+        default-active="1"
+        mode="horizontal"
+        @select="handleSelect"
+        active-text-color="#3068F4"
+      >
         <el-menu-item index="1">首页</el-menu-item>
         <el-menu-item index="2">实时汇率</el-menu-item>
         <el-menu-item index="3">常见问题</el-menu-item>
@@ -24,40 +29,66 @@
       </div>
     </div>
     <!-- header end -->
+    <div v-if="selected === '1'">
+      <main-index />
+    </div>
+    <div v-else-if="selected === '2'">
+      <exchange-money style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px;" />
+    </div>
     <!-- banner -->
-    <div class="banner" :style="backgroundDiv">
-      <h1>寻找并预定覆盖全港的找换店</h1>
-      <div class="money-change">
-        <calculator-box class="box-card"> </calculator-box>
-        <div class="money-list">123</div>
+
+    <div class="footer1">
+      <h3>contact</h3>
+      <div class="contact">
+        <span>香港九龍深水埗長沙灣道226-242號 <br />深之都商場二樓92號舖</span>
+        <p>Tel : 400-000-0000 <br />E-mail : *****@entu.io</p>
+        <div class="ext">
+          <a href="">网站首页</a>
+          <a href="">帮助中心</a>
+          <a href="">帮助中心</a>
+          <a href="">帮助中心</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer2">
+      <p>Copyright © 2019 POINT LINK TECHNOLOGY, All Rights Reserved</p>
+      <div>
+        <i class="el-icon-platform-eleme"></i
+        ><i class="el-icon-platform-eleme"></i
+        ><i class="el-icon-platform-eleme"></i>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CalculatorBox from "./components/CalculatorBox.vue";
+import MainIndex from "./components/MainIndex.vue";
+import ExchangeMoney from "./components/ExchangeMoney.vue"
 export default {
-  components: { CalculatorBox },
+  components: {
+    MainIndex,
+    ExchangeMoney
+  },
   name: "App",
   data() {
     return {
+      selected: "1",
       language: "中文",
-      backgroundDiv: {
-        backgroundImage: "url(" + require("./assets/BG.png") + ")",
-      },
     };
   },
-
   methods: {
     handleLanguageCommand(value) {
       console.log(value);
+    },
+    handleSelect(key) {
+      console.log('key', key);
+      this.selected = key;
     },
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -68,6 +99,7 @@ div .header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
   /* border-bottom: #3356A5 solid 14px;  */
   box-shadow: 9px 11px 46px 0px rgba(51, 86, 165, 0.05);
 }
@@ -91,39 +123,78 @@ div .header {
   flex-direction: row-reverse;
   margin-right: 280px;
 }
-div .banner {
-  background: no-repeat center top;
-  height: 1080px;
-  width: 100%;
+
+.footer1 {
+  height: 360px;
+  background: #fff;
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: relative;
+  padding: 0px 280px;
+  border-top: solid 1px #EEEEEE;
+  h3 {
+    font-size: 46px;
+    font-family: Bebas Neue;
+    font-weight: 400;
+    color: #333333;
+  }
+  .contact {
+    display: flex;
+    flex-direction: row;
+    span {
+      font-size: 18px;
+      font-family: Source Han Sans CN;
+      font-weight: 400;
+      color: #333333;
+      line-height: 36px;
+      display: block;
+      width: 360px;
+      border-right: 2px dotted #888;
+    }
+    p {
+      font-size: 18px;
+      font-weight: 400;
+      color: #333333;
+      line-height: 36px;
+      margin: 0 0 0 60px;
+      display: block;
+    }
+  }
+  .ext {
+    align-self: flex-end;
+    flex: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    a {
+      margin-right: 45px;
+      color: #333;
+      font-size: 20px;
+      font-weight: 500;
+      text-decoration-line: none;
+    }
+  }
 }
-.banner h1 {
-  margin-top: 190px;
-  font-size: 70px;
-  text-align: center;
-}
-.banner .money-change {
+.footer2 {
+  background: #f9f9f9;
+  height: 102px;
   display: flex;
   flex-direction: row;
-}
-.banner .box-card {
-  width: 560px;
-  height: 585px;
-  background: #ffffff;
-  box-shadow: 16px 8px 79px 0px rgba(84, 94, 119, 0.2);
-  border-radius: 12px;
-  align-self: center;
-  margin: 0 auto;
   position: relative;
-}
-.banner .money-list {
-  width: 220px;
-  height: 412px;
-  background: red;
-  box-shadow: 8px 9px 24px 0px rgba(165, 148, 191, 0.25);
-  border-radius: 6px;
-  position: absolute;
+  padding: 0px 280px;
+  p {
+    font-size: 16px;
+    color: #999;
+    font-weight: 400;
+    flex-grow: 1;
+    align-self: center;
+  }
+  div {
+    align-self: center;
+    i {
+      margin-right: 25px;
+      font-size: 32px;
+      color: #999;
+    }
+  }
 }
 </style>
