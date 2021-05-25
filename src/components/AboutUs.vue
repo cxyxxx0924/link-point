@@ -90,8 +90,8 @@ export default {
   padding: 60px 280px;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   div:first-child {
-    margin-right: 130px;
     h3 {
       font-size: 40px;
       font-family: Source Han Sans CN;
@@ -109,7 +109,7 @@ export default {
     }
   }
   div:nth-child(2) {
-    width: 500px;
+    width: 600px;
     p {
       line-height: 44px;
     }
