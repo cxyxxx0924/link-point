@@ -33,12 +33,10 @@
       <main-index />
     </div>
     <div v-else-if="selected === '2'">
-      <exchange-money
-        style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px"
-      />
+      <exchange-money />
     </div>
     <div v-else-if="selected === '3'">
-      <faq style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px" />
+      <faq/>
     </div>
     <div v-else-if="selected === '4'">
       <about-us></about-us>
@@ -70,10 +68,10 @@
 </template>
 
 <script>
-import MainIndex from "./components/MainIndex.vue";
-import ExchangeMoney from "./components/ExchangeMoney.vue";
-import AboutUs from "./components/AboutUs.vue";
-import Faq from "./components/Faq.vue";
+import MainIndex from "./page/MainIndex.vue";
+import ExchangeMoney from "./page/ExchangeMoney.vue";
+import AboutUs from "./page/AboutUs.vue";
+import Faq from "./page/Faq.vue";
 export default {
   components: {
     MainIndex,
@@ -84,7 +82,7 @@ export default {
   name: "App",
   data() {
     return {
-      selected: "3",
+      selected: "1",
       language: "中文",
     };
   },
@@ -108,8 +106,8 @@ export default {
   color: #333;
 }
 $breakpoints: (
-  small: 320px,
-  medium: 1000px,
+  small: 500px,
+  medium: 900px,
   large: 1400px,
 );
 .header {
@@ -117,36 +115,49 @@ $breakpoints: (
   flex-direction: row;
   align-items: center;
   position: relative;
-  @include media(">large") {
-    padding: 0 220px;
-  }
-  @include media(">medium", "<=large") {
+  padding: 0 220px;
+  @include media(">=medium", "<large") {
     padding: 0 70px;
+  }
+  @include media(">=small", "<medium") {
+    padding: 0;
   }
   /* border-bottom: #3356A5 solid 14px;  */
   box-shadow: 9px 11px 46px 0px rgba(51, 86, 165, 0.05);
+}
+.el-menu-item {
+  @include media(">=small", "<medium") {
+    padding: 0 5px;
+  }
 }
 
 .xchange {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 36px;
   color: #3048f4;
-  @include media(">large") {
+  @include media(">=large") {
     margin-right: 102px;
   }
-  @include media(">medium") {
-    margin-right: 0 50px;
+  @include media(">=medium", "<large") {
+    margin-right: 50px;
+  }
+  @include media(">=small", "<medium") {
+    margin-right: 0px;
+    font-size: 16px;
+  }
+  @include media("<small") {
+    display: none;
   }
 }
 .header .el-menu {
   border-bottom: none !important;
 }
 .header .el-menu li {
-  @include media(">large") {
+  @include media(">=large") {
     margin-right: 30px;
   }
-  @include media(">medium") {
-    padding: 0 30px;
+  @include media(">=small", "<medium") {
+    margin-right: 10px;
   }
 }
 
@@ -161,34 +172,62 @@ $breakpoints: (
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 80px 130px;
   border-top: solid 1px #eeeeee;
+  padding: 80px 130px;
+  @include media(">=large") {
+    padding: 80px 130px;
+  }
+  @include media(">=medium", "<large") {
+    padding: 40px;
+  }
+  @include media("<medium") {
+    padding: 10px;
+  }
   h3 {
     font-size: 46px;
     font-family: Bebas Neue;
     font-weight: 400;
     color: #333333;
+    @include media(">=small", "<medium") {
+      font-size: 16px;
+    }
   }
   .contact {
     display: flex;
     flex-direction: row;
     span {
-      font-size: 18px;
       font-family: Source Han Sans CN;
-      font-weight: 400;
       color: #333333;
-      line-height: 36px;
       display: block;
-      width: 360px;
       border-right: 2px dotted #888;
+      font-size: 18px;
+      width: 360px;
+      line-height: 36px;
+      @include media(">=medium", "<large") {
+        width: 300px;
+      }
+      @include media(">=small", "<medium") {
+        width: 150px;
+        font-size: 12px;
+      }
     }
     p {
       font-size: 18px;
       font-weight: 400;
       color: #333333;
       line-height: 36px;
-      margin: 0 0 0 60px;
       display: block;
+      margin-left: 60px;
+      @include media(">=large") {
+        margin-left: 60px;
+      }
+      @include media(">=medium", "<large") {
+        margin-left: 30px;
+      }
+      @include media(">=small", "<medium") {
+        margin-left: 0px;
+        font-size: 12px;
+      }
     }
   }
   .ext {
@@ -197,11 +236,20 @@ $breakpoints: (
     display: flex;
     flex-direction: row-reverse;
     a {
-      margin-left: 45px;
       color: #333;
       font-size: 20px;
       font-weight: 500;
       text-decoration-line: none;
+      @include media(">=large") {
+        margin-right: 45px;
+      }
+      @include media(">=medium", "<large") {
+        margin-right: 10px;
+        font-size: 16px;
+      }
+      @include media(">=small", "<medium") {
+        font-size: 12px;
+      }
     }
   }
 }
@@ -212,12 +260,20 @@ $breakpoints: (
   flex-direction: row;
   position: relative;
   padding: 0px 280px;
+  @include media(">=medium", "<large") {
+    padding: 0px 80px;
+  }
+  @include media(">=small", "<medium") {
+    padding: 0px 5px;
+  }
   p {
     font-size: 16px;
     color: #999;
-    font-weight: 400;
     flex-grow: 1;
     align-self: center;
+    @include media(">=small", "<medium") {
+      font-size: 12px;
+    }
   }
   div {
     align-self: center;
@@ -225,6 +281,10 @@ $breakpoints: (
       margin-right: 25px;
       font-size: 32px;
       color: #999;
+      @include media(">=small", "<medium") {
+        margin-right: 5px;
+        font-size: 20px;
+      }
     }
   }
 }

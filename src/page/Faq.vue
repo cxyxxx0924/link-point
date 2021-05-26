@@ -1,19 +1,21 @@
 <template>
-  <div>
+  <div class="faq-body">
     <div class="header1">
       <h1>有什么需要帮忙吗？</h1>
     </div>
     <div class="faqs">
-      <h3>常见问题</h3>
       <div class="faqs-box">
-        <div class="faqs">
-          <div v-for="item in leftFaqs" :key="item.id">
-            <faq-item :faq="item"></faq-item>
+        <h3>常见问题</h3>
+        <div class="box">
+          <div class="faqs">
+            <div v-for="item in leftFaqs" :key="item.id">
+              <faq-item :faq="item"></faq-item>
+            </div>
           </div>
-        </div>
-        <div class="faqs">
-          <div v-for="item in rightFaqs" :key="item.id">
-            <faq-item :faq="item"></faq-item>
+          <div class="faqs">
+            <div v-for="item in rightFaqs" :key="item.id">
+              <faq-item :faq="item"></faq-item>
+            </div>
           </div>
         </div>
       </div>
@@ -22,7 +24,7 @@
 </template>
 
 <script>
-import FaqItem from "./FaqItem";
+import FaqItem from "../components/FaqItem";
 export default {
   mounted() {
     this.faqs.push({
@@ -88,28 +90,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$breakpoints: (
+  small: 500px,
+  medium: 900px,
+  large: 1400px,
+);
 .header1 {
   text-align: center;
   padding: 180px 0px;
+  @include media(">=medium", "<large") {
+    padding: 120px 0px;
+  }
+  @include media(">=small", "<medium") {
+    padding: 60px 0px;
+  }
   h1 {
-    font-size: 46px;
     font-family: Source Han Sans CN;
-    font-weight: 400;
     color: #10040c;
+    font-size: 46px;
     line-height: 60px;
+    @include media(">=medium", "<large") {
+      font-size: 32px;
+      line-height: 40px;
+    }
+    @include media(">=small", "<medium") {
+      font-size: 22px;
+      line-height: 20px;
+    }
+  }
+}
+.faq-body {
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 330px;
+  @include media(">=medium", "<large") {
+    margin-top: 25px;
+    margin-bottom: 220px;
+  }
+  @include media(">=small", "<medium") {
+    margin-top: 15px;
+    margin-bottom: 110px;
   }
 }
 .faqs {
   display: flex;
   flex-direction: column;
   // justify-content: space-between;
-  h3 {
-    font-size: 40px;
-    font-family: Source Han Sans CN;
-    font-weight: 500;
-    color: #10040c;
-    line-height: 60px;
-  }
+  align-items: center;
   .faqs-items {
     display: flex;
     flex-direction: column;
@@ -117,6 +144,32 @@ export default {
 }
 .faqs-box {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  h3 {
+    font-family: Source Han Sans CN;
+    color: #10040c;
+    align-self: flex-start;
+    font-size: 40px;
+    line-height: 60px;
+    margin-left: 30px;
+    @include media(">=medium", "<large") {
+      font-size: 30px;
+      line-height: 40px;
+    }
+    @include media(">=small", "<medium") {
+      font-size: 20px;
+      line-height: 20px;
+    }
+  }
+  .box {
+    display: flex;
+    flex-direction: row;
+    @include media(">=small", "<medium") {
+      flex-direction: column;
+    }
+  }
+  // @include media(">=small", "<medium") {
+  //   flex-direction: column;
+  // }
 }
 </style>
