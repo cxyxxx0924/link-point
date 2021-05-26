@@ -26,7 +26,7 @@
         <span class="money">6000</span>
       </div>
     </div>
-    <span>1hkd=0.862cny (此汇率仅供参考)</span>
+    <span class="change">1hkd=0.862cny (此汇率仅供参考)</span>
   </div>
 </template>
 
@@ -96,6 +96,9 @@ export default {};
     color: #3068F4;
     font-weight: bold;
     font-size: 44px;
+  }
+  .change {
+    margin-top: 25px;
   }
 }
 </style>

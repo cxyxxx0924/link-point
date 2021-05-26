@@ -33,10 +33,12 @@
       <main-index />
     </div>
     <div v-else-if="selected === '2'">
-      <exchange-money style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px;" />
+      <exchange-money
+        style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px"
+      />
     </div>
     <div v-else-if="selected === '3'">
-      <faq style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px;" />
+      <faq style="padding: 0 280px; margin-top: 40px; margin-bottom: 330px" />
     </div>
     <div v-else-if="selected === '4'">
       <about-us></about-us>
@@ -70,14 +72,14 @@
 <script>
 import MainIndex from "./components/MainIndex.vue";
 import ExchangeMoney from "./components/ExchangeMoney.vue";
-import AboutUs from "./components/AboutUs.vue"
-import Faq from './components/Faq.vue';
+import AboutUs from "./components/AboutUs.vue";
+import Faq from "./components/Faq.vue";
 export default {
   components: {
     MainIndex,
     ExchangeMoney,
     AboutUs,
-    Faq
+    Faq,
   },
   name: "App",
   data() {
@@ -91,7 +93,7 @@ export default {
       console.log(value);
     },
     handleSelect(key) {
-      console.log('key', key);
+      console.log("key", key);
       this.selected = key;
     },
   },
@@ -105,26 +107,47 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: #333;
 }
-div .header {
+$breakpoints: (
+  small: 320px,
+  medium: 1000px,
+  large: 1400px,
+);
+.header {
   display: flex;
   flex-direction: row;
   align-items: center;
   position: relative;
-  padding: 0 260px;
+  @include media(">large") {
+    padding: 0 220px;
+  }
+  @include media(">medium", "<=large") {
+    padding: 0 70px;
+  }
   /* border-bottom: #3356A5 solid 14px;  */
   box-shadow: 9px 11px 46px 0px rgba(51, 86, 165, 0.05);
 }
+
 .xchange {
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 36px;
   color: #3048f4;
-  margin-right: 102px;
+  @include media(">large") {
+    margin-right: 102px;
+  }
+  @include media(">medium") {
+    margin-right: 0 50px;
+  }
 }
 .header .el-menu {
   border-bottom: none !important;
 }
 .header .el-menu li {
-  margin-right: 30px;
+  @include media(">large") {
+    margin-right: 30px;
+  }
+  @include media(">medium") {
+    padding: 0 30px;
+  }
 }
 
 .header .language {
@@ -139,7 +162,7 @@ div .header {
   flex-direction: column;
   position: relative;
   padding: 80px 130px;
-  border-top: solid 1px #EEEEEE;
+  border-top: solid 1px #eeeeee;
   h3 {
     font-size: 46px;
     font-family: Bebas Neue;
